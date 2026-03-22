@@ -6,7 +6,7 @@ function resetProducts() {
   id = 0;
 }
 
-function addProduct() {
+function addProduct(name, price) {
   if (!name || !price) {
     throw new Error("Name and price are required");
   }
@@ -36,10 +36,23 @@ function getProduct(idToFind) {
   return product;
 }
 
-function updateProduct(idToUpdate, name, price) {
+/* function updateProduct(idToUpdate, name, price) {
   const product = getProduct(idToUpdate);
   if (name) product.name = name;
   if (price) product.price = price;
+} */
+
+function updateProduct(idToUpdate, name, price) {
+  const product = products.find((p) => p.id === idToUpdate);
+
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  if (name) product.name = name;
+  if (price) product.price = price;
+
+  return product;
 }
 
 module.exports = {
